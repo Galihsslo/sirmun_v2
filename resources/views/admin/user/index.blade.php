@@ -1,12 +1,16 @@
 @extends('layouts.admin.index')
+
 @section('row')
     <div class="col-xl-12 col-lg-9">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Pengguna</h6>
+
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-solid fa-users"></i> Pengguna</h6>
+
                 <div class="dropdown no-arrow">
-                    <a href="{{ route('tambah.user') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    <a href="{{ route('tambah.user') }}"
+                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-solid fa-plus"></i>Tambah Pengguna</a>
                 </div>
             </div>
@@ -98,7 +102,8 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm ">Hapus</button>
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-sm ">Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>

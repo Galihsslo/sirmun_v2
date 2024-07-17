@@ -16,6 +16,12 @@ class AdminController extends Controller
         return view('admin.index', ['user' => $user]);
         // return view('404');
     }
+    public function layout()
+    {
+        $user = User::all();
+        return view('layout.admin.index', ['user' => $user]);
+        // return view('404');
+    }
 
     public function profile(){
 

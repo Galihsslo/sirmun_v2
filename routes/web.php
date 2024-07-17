@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
     // Artikel Resource
     Route::get('admin/artikel', [ArtikelController::class, 'index'])->name('artikel')->middleware('userAkses:admin', );
     Route::get('admin/artikel/tambah', [ArtikelController::class, 'create'])->name('tambah.artikel')->middleware('userAkses:admin', );
-    Route::post('admin/artikel/tambah', [ArtikelController::class, 'store'])->name('tambah.artikel')->middleware('userAkses:admin', );
+    Route::post('admin/artikel/store', [ArtikelController::class, 'store'])->name('artikel.store')->middleware('userAkses:admin', );
     Route::get('admin/artikel/edit/{id}', [ArtikelController::class, 'edit'])->name('edit.artikel')->middleware('userAkses:admin', );
     Route::post('admin/artikel/edit/{id}', [ArtikelController::class, 'update'])->name('edit.artikel')->middleware('userAkses:admin', );
     Route:: DELETE('admin/artikel/delete/{id}', [ArtikelController::class, 'delete'])->name('delete.artikel')->middleware('userAkses:admin', );
