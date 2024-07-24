@@ -14,6 +14,7 @@ class artikel extends Model
         'title',
         'content',
         'image',
+        'author_id',
         'created_at',
         'updated_at',
     ];

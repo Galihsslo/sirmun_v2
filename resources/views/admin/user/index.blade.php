@@ -9,8 +9,7 @@
                 <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-solid fa-users"></i> Pengguna</h6>
 
                 <div class="dropdown no-arrow">
-                    <a href="{{ route('tambah.user') }}"
-                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    <a href="{{ route('tambah.user') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-solid fa-plus"></i>Tambah Pengguna</a>
                 </div>
             </div>
@@ -30,10 +29,15 @@
                                         </select> entries</label></div>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                <div id="dataTable_filter" class="dataTables_filter">
+                                    <label>Search:
+                                        <input type="search"
                                             class="form-control form-control-sm" placeholder=""
-                                            aria-controls="dataTable"></label></div>
+                                            aria-controls="dataTable">
+                                    </label>
+                                </div>
                             </div>
+
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
@@ -102,8 +106,7 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit"
-                                                            class="btn btn-danger btn-sm ">Hapus</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm ">Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>

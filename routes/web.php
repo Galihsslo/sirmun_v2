@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PembayaranController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\ArtikelController;
 use PHPUnit\Framework\Constraint\Operator;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\BendaharaController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -24,7 +26,7 @@ use App\Http\Controllers\UserController;
 // Guest
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('index');
     });
 });
 
@@ -48,29 +50,42 @@ Route::middleware(['auth'])->group(function () {
     Route::put('admin/user/update/{id}', [UserController::class, 'update'])->name('update.user')->middleware('userAkses:admin', );
     Route::delete('admin/user/delete/{id}', [UserController::class, 'destroy'])->name('delete.user')->middleware('userAkses:admin', );
     Route::get('profile', [AdminController::class, 'profile'])->name('profile')->middleware('userAkses:admin', );
+    Route::get('/search', [UserController::class, 'search'])->name('search')->middleware('userAkses:admin', );
 
     // Artikel Resource
     Route::get('admin/artikel', [ArtikelController::class, 'index'])->name('artikel')->middleware('userAkses:admin', );
     Route::get('admin/artikel/tambah', [ArtikelController::class, 'create'])->name('tambah.artikel')->middleware('userAkses:admin', );
-    Route::post('admin/artikel/store', [ArtikelController::class, 'store'])->name('artikel.store')->middleware('userAkses:admin', );
+    Route::post('admin/artikel/tambah', [ArtikelController::class, 'store'])->name('artikel.store')->middleware('userAkses:admin', );
     Route::get('admin/artikel/edit/{id}', [ArtikelController::class, 'edit'])->name('edit.artikel')->middleware('userAkses:admin', );
-    Route::post('admin/artikel/edit/{id}', [ArtikelController::class, 'update'])->name('edit.artikel')->middleware('userAkses:admin', );
-    Route:: DELETE('admin/artikel/delete/{id}', [ArtikelController::class, 'delete'])->name('delete.artikel')->middleware('userAkses:admin', );
+    Route::POST('admin/artikel/edit/{id}', [ArtikelController::class, 'update'])->name('artikel.update')->middleware('userAkses:admin', );
+    Route:: DELETE('admin/artikel/delete/{title}', [ArtikelController::class, 'destroy'])->name('delete.artikel')->middleware('userAkses:admin', );
 });
+    //admin group
+    Route::group(['middleware' => ['auth', 'userAkses:admin']], function () {
+        // Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
+    });
     //Bendahara Group
 Route::group(['middleware' => ['auth', 'userAkses:bendahara']], function () {
     Route::get('bendahara/tambah', [BendaharaController::class, 'create'])->name('bendahara');
+    Route::get('bendahara/profile', [BendaharaController::class, 'profile'])->name('profile');
+    Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
+
+
 });
 
 
     //Operator Group
-Route::middleware(['auth'])->group(function () {
-
+Route::group(['middleware' => ['auth', 'userAkses:operator']], function () {
+    Route::get('pembayaran', [OperatorController::class, 'pembayaran'])->name('pembayaran');
+    Route::get('pembayaran/view/{id}', [OperatorController::class, 'view'])->name('view');
+    Route::post('bayar', [OperatorController::class, 'bayar'])->name('bayar');
+    Route::get('invoice/{id}', [OperatorController::class, 'invoice'])->name('invoice');
 });
 
     //operator
 Route::middleware(['guest'])->group(function () {
-    Route::get('rumah',[AdminController::class, 'create'])->name('register');
+    Route::get('halaman',[AdminController::class, 'halaman'])->name('halaman');
+
 });
 
 

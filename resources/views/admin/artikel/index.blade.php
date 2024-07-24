@@ -71,12 +71,26 @@
                                     <tr class="odd">
                                         <td class="sorting_1">{{ $i++ }}</td>
                                         <td>{{ $item->title }}</td>
-                                        <td>{{ $item->content }}</td>
-                                        <td>{{ $item->image }}</td>
-                                        <td>{{ $item->nama }}</td>
+                                        <td>{{ Str::limit($item->content, 100) }}</td>
                                         <td>
-                                            <a href="/admin/user/1/edit" class="btn btn-primary btn-sm md-1">Edit</a>
-                                            <a href="/admin/user/1/delete" class="btn btn-danger btn-sm ">Delete</a>
+                                            @if ($item->image)
+                                                <img src="{{ url('foto_artikel/' . $item->image) }}" width="50px"
+                                                    height="50px">
+                                            @endif
+                                        </td>
+                                        <td>{{ $item->author->nama }}</td>
+                                        <td>
+                                            <a href="{{ url('/admin/artikel/edit/' . $item->id . '') }}"
+                                                class="btn btn-primary btn-sm md-1">Edit</a>
+                                            {{-- <a href="{{ url('/admin/artikel/delete/' . $item->id . '') }}"
+                                                class="btn btn-danger btn-sm ">Delete</a> --}}
+                                            <form onsubmit="return confirm('Are you sure?')" class="d-inline"
+                                                action="{{ url('/admin/artikel/delete/' . $item->id . '') }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm ">Hapus</button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

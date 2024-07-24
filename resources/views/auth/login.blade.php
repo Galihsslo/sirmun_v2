@@ -19,10 +19,13 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin') }}/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
 
 <body class="bg-gradient-primary">
+
+
 
     <div class="container">
 
@@ -37,6 +40,17 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">SIRMUN</h1>
+                            </div>
+                            <div class="modal-body">
+                                @if($errors->any())
+
+                                @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger">
+                                    {{ $error }}
+                                </div>
+                                @endforeach
+
+                                @endif
                             </div>
                             <form class="user" action="{{ route('login') }}" method="POST">
                                 @csrf
@@ -97,7 +111,15 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('admin') }}/js/sb-admin-2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+    <script>
+        $(document).ready(function() {
+            @if($errors->any())
+                $('modal_fade').modal('show');
+            @endif
+        });
+    </script>
 </body>
 
 </html>

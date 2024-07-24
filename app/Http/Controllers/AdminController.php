@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\artikel;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,19 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $ariktel = artikel::all();
         $user = User::all();
-        return view('admin.index', ['user' => $user]);
+        return view('admin.index', ['user' => $user, 'artikel' => $ariktel]);
         // return view('404');
     }
+
+    public function halaman()
+    {
+        $user = User::all();
+        return view('index', ['user' => $user]);
+        // return view('404');
+    }
+
     public function layout()
     {
         $user = User::all();

@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     <title>Admin - Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('admin') }}/logo.png">
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('admin') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -60,7 +61,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menu
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -85,10 +86,21 @@
                 </a>
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <span>Berita</span></a>
             </li>
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <hr class="sidebar-divider">
             <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('transaksi') }}">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Transaksi</span>
+                </a>
+            </li>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+            <!-- Nav Item - Utilities Collapse Menu -->
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-newspaper"></i>
@@ -104,7 +116,7 @@
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
             {{-- <!-- Divider -->
             <hr class="sidebar-divider">

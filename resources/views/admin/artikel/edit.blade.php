@@ -1,7 +1,6 @@
 @extends('layouts.admin.index')
 @section('row')
-    <div class="col-xl-12 col-lg-9">
-
+<div class="col-xl-12 col-lg-9">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -23,122 +22,59 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                @include('admin.pesan')
+
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
                         <div class="row">
                             <div class="col-sm-12">
-
-
-
-                                {{-- <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
-                                    role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                aria-label="Name: activate to sort column descending" style="width: 50px;">
-                                                Nama</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width:   40px;">Email</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Office: activate to sort column ascending"
-                                                style="width: 76px;">Role</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Age: activate to sort column ascending"
-                                                style="width: 31px;">Foto</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Start date: activate to sort column ascending"
-                                                style="width: 20px;">Telpon</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Start date: activate to sort column ascending"
-                                                style="width: 20px;">Alamat</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Salary: activate to sort column ascending"
-                                                style="width: 99px;">Aksi</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                        <tr class="odd">
-                                            <td class="sorting_1"></td>
-                                            <td>as</td></td>
-                                            <td>da</td>
-                                            <td>
-                                                <a href="/admin/user/1/edit" class="btn btn-primary btn-sm md-1">Edit</a>
-                                                <a href="/admin/user/1/delete" class="btn btn-danger btn-sm ">Delete</a>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-
-                                </table> --}}
-                                {{-- <form>
-                                    <div class="form-group">
-                                        <label for="kegiatan">Kegiatan</label>
-                                        <input type="text" class="form-control" name="kegiatan" id="kegiatan" placeholder="Nama Kegiatan">
-                                    </div>
-                                </form> --}}
                                 <div class="col-md-12">
                                     <div class="card border-0 shadow">
                                         <div class="card-header">
-                                            <h6 class="m-0 font-weight-bold"><i class="fas fa-user-circle"></i> Edit Pengguna</h6>
+                                            <h6 class="m-0 font-weight-bold"><i class="fas fa-user-circle"></i> Tambah Pengguna</h6>
                                         </div>
 
                                         <div class="card-body">
-
-                                            <form method="POST" action="{{ route('update.user', $data->id) }}" enctype="multipart/form-data">
+                                            <form method="POST" action="{{ route('artikel.update', $artikel->id) }}" enctype="multipart/form-data">
                                                 @csrf
-                                                @method('PUT')
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">Nama</label>
-                                                    <input type="nama" name="nama" class="form-control"
-                                                        value="{{ $data->nama }}" required autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">email</label>
-                                                    <input type="email" name="email" class="form-control"
-                                                        value="{{ $data->email }}" required autofocus />
-                                                </div>
-                                                <div class="form-group">
+                                                @method('POST')
 
-                                                    <label class="text-uppercase">role</label>
-                                                            <select name="role" id="role" class="form-select" aria-label="Default select example">
-                                                                <option selected>{{ $data->role }}</option>
-                                                                <option value="bendahara">Bendahara</option>
-                                                                <option value="operator">Operator</option>
-                                                              </select>
-                                                    </select>
+
+                                                <div class="form-group">
+                                                    <label class="text-uppercase">Judul</label>
+                                                    <input type="nama" name="title" class="form-control"
+                                                    value="{{ $artikel->title }}"  required autofocus />
                                                 </div>
-                                                @if ($data->foto)
-                                                        <img src="{{ url('foto_user/' . $data->foto) }}" width="50px"
+
+                                                <div class="form-group">
+                                                    <label class="text-uppercase">content</label>
+                                                    <textarea type="text" name="content" class="form-control"
+                                                        value="" required autofocus >{{ $artikel->content }}</textarea>
+                                                </div>
+                                                @if ($artikel->image)
+                                                        <img src="{{ url('foto_artikel/' . $artikel->image) }}" width="50px"
                                                             height="50px">
                                                     @endif
                                                 <div class="mb-3">
-                                                    <label for="foto" class="form-label">Masukkan Foto</label>
-                                                    <input class="form-control" type="file" id="foto" name="foto" multiple>
-                                                  </div>
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">telpon</label>
-                                                    <input type="telpon" name="telpon" class="form-control"
-                                                        value="{{ $data->telpon }}" required autofocus />
+                                                    <label for="image" class="form-label">Masukkan Foto</label>
+                                                    <input class="form-control" type="file" id="image" name="image" multiple>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">password</label>
-                                                    <input type="text" name="password" class="form-control"
-                                                        value="" placeholder="Masukkan Password" required autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">Alamat</label>
-                                                    <input type="alamat" name="alamat" class="form-control"
-                                                        value="{{ $data->alamat }}" required autofocus />
+                                                {{-- <div class="form-group">
+                                                    <label class="text-uppercase">author_id</label>
+                                                    <input type="author_id" name="author_id" class="form-control"
+                                                        placeholder="Masukkan author_id" required autofocus />
+                                                </div> --}}
+
+                                                <div class="mb-3">
+                                                    <label for="author_id" class="form-label">Pilih Penulis</label>
+                                                    <select class="form-control" id="author_id" name="author_id" required>
+                                                        @foreach($users as $user)
+                                                        <option value="{{ $user->id }}" {{ $artikel->author_id == $user->id ? 'selected' : '' }}>{{ $user->nama }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <button class="btn btn-primary text-uppercase" type="submit">
-                                                        Update Profile
+                                                        Ubah Artikel
                                                     </button>
                                                 </div>
 
@@ -158,3 +94,6 @@
         </div>
     </div>
 @endsection
+@if (Session::get('success'))
+    <div class="alert alert-success">{{ Session::get('success') }}"></div>
+@endif

@@ -4,7 +4,7 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Artikel</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Pengguna</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -30,7 +30,7 @@
                                 <div class="col-md-12">
                                     <div class="card border-0 shadow">
                                         <div class="card-header">
-                                            <h6 class="m-0 font-weight-bold"><i class="fas fa-user-circle"></i> Tambah Artikel</h6>
+                                            <h6 class="m-0 font-weight-bold"><i class="fas fa-user-circle"></i> Tambah Pengguna</h6>
                                         </div>
 
                                         <div class="card-body">
@@ -40,52 +40,31 @@
 
                                                 <div class="form-group">
                                                     <label class="text-uppercase">Judul</label>
-                                                    <input type="title" name="title" class="form-control"
-                                                        placeholder="Masukkan title" required autofocus />
+                                                    <input type="nama" name="title" class="form-control"
+                                                        placeholder="Masukkan Nama" required autofocus />
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="text-uppercase">title</label>
-                                                    <input type="text" name="title" class="form-control"
-                                                        placeholder="Masukkan title" required autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">Content</label>
-                                                    <input type="text" name="content" class="form-control"
+                                                    <label class="text-uppercase">content</label>
+                                                    <input type="content" name="content" class="form-control"
                                                         placeholder="Masukkan content" required autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">Content</label>
-                                                    <input type="text" name="content" class="form-control"
-                                                        placeholder="Masukkan content" required autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">role</label>
-                                                            <select name="role" id="role" class="form-select" aria-label="Default select example">
-                                                                <option placeholder="Pilih Role"selected>{{ auth()->user()->nama }}</option>
-                                                                <option placeholder="Pilih Role">Admin</option>
-                                                                <option placeholder="Pilih Role">Bendahara</option>
-                                                                <option placeholder="Pilih Role">Operator</option>
-                                                            </select>
-                                                    </select>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="foto" class="form-label">Masukkan Foto</label>
-                                                    <input class="form-control" type="file" id="foto" name="foto" multiple>
-                                                  </div>
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">telpon</label>
-                                                    <input type="telpon" name="telpon" class="form-control"
-                                                        placeholder="Masukkan Telpon" required autofocus />
+                                                    <label for="image" class="form-label">Masukkan Foto</label>
+                                                    <input class="form-control" type="file" id="image" name="image" multiple>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">password</label>
-                                                    <input type="text" name="password" class="form-control"
-                                                        placeholder="Masukkan Password" required autofocus />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="text-uppercase">Alamat</label>
-                                                    <input type="alamat" name="alamat" class="form-control"
-                                                        placeholder="Masukkan Alamat" required autofocus />
+                                                {{-- <div class="form-group">
+                                                    <label class="text-uppercase">author_id</label>
+                                                    <input type="author_id" name="author_id" class="form-control"
+                                                        placeholder="Masukkan author_id" required autofocus />
+                                                </div> --}}
+                                                <div class="mb-3">
+                                                    <label for="author_id" class="form-label">Pilih Penulis</label>
+                                                    <select class="form-control" id="author_id" name="author_id" required>
+                                                        <option value="">-- Pilih Penulis --</option>
+                                                        @foreach($users as $user)
+                                                            <option value="{{ $user->id }}">{{ $user->nama }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <button class="btn btn-primary text-uppercase" type="submit">

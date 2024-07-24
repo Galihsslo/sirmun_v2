@@ -18,6 +18,14 @@ class UserController extends Controller
         return view('admin.user.index', ['data' => $data]);
     }
 
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = User::where('nama', 'LIKE', "%{$query}%")->get(); // Sesuaikan dengan kolom yang Anda cari
+
+        return view('admin.user.index', compact('results')); // Kembali ke view yang sama dengan hasil pencarian
+
+    }
+
     /**
      * Show the form for creating a new resource.
      */

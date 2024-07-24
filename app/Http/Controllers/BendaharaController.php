@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,13 @@ class BendaharaController extends Controller
      */
     public function index()
     {
-        return view('bendahara.index');
+        $data = Transaksi::all();
+        $amount = Transaksi::where('status', 'paid')->sum('jumlah');
+        return view('bendahara.index',compact('data', 'amount'));
+    }
+    public function profile()
+    {
+        return view('bendahara.profile');
     }
 
     /**
