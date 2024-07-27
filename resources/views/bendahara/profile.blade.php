@@ -1,4 +1,4 @@
-@extends('layouts.admin.index')
+@extends('layouts.bendahara.index')
 @section('row')
     <div class="col-xl-12 col-lg-9">
 

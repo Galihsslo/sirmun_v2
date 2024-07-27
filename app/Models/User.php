@@ -32,11 +32,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(artikel::class, 'author_id');
     }
+    public function berita()
+    {
+        return $this->hasMany(Berita::class, 'berita');
+    }
 
     public function transaksi()
     {
         return $this->hasMany(Transaksi::class, 'petugas_id');
     }
+
+    public function pembayaran()
+    {
+        return $this->hasMany(Transaksi::class, 'petugas');
+    }
+
 
 
 

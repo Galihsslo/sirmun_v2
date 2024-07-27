@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaksi;
 use App\Models\User;
+use App\Models\Transaksi;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 class BendaharaController extends Controller
 {
@@ -13,9 +15,35 @@ class BendaharaController extends Controller
      */
     public function index()
     {
-        $data = Transaksi::all();
-        $amount = Transaksi::where('status', 'paid')->sum('jumlah');
-        return view('bendahara.index',compact('data', 'amount'));
+        $pendapatan = Pembayaran::where('is_expense', 'N')->get(['nominal', 'date']);
+        $pengeluaran = Pembayaran::where('is_expense', 'Y')->get(['nominal', 'date']);
+
+        $dataPendapatan = $pendapatan->map(function ($item) {
+            return [
+                'nominal' => $item->nominal,
+                'date' => $item->date,
+            ];
+        });
+
+        $dataPengeluaran = $pengeluaran->map(function ($item) {
+            return [
+                'nominal' => $item->nominal,
+                'date' => $item->date,
+            ];
+        });
+
+        $data = Pembayaran::all();
+        $amount = Pembayaran::where('status', 'paid')->where('is_expense', 'N')->sum('nominal');
+        $expense = Pembayaran::where('status', 'paid')->where('is_expense', 'Y')->sum('nominal');
+        $selisih = $amount - $expense;
+        return view('bendahara.index', compact(
+            'data',
+            'amount',
+            'expense',
+            'selisih',
+            'dataPengeluaran',
+            'dataPendapatan'
+        ));
     }
     public function profile()
     {

@@ -75,7 +75,7 @@
                   <div class="row">
                     <div class="col-xl-8">
                       <ul class="list-unstyled">
-                        <li class="text-muted">To: <span style="color:#5d9fc5 ;">{{ $data->nama }}</span></li>
+                        <li class="text-muted">To: <span style="color:#5d9fc5 ;">{{ $data->id }}</span></li>
                         <li class="text-muted">Street, City</li>
                         <li class="text-muted">State, Country</li>
                         <li class="text-muted"><i class="fas fa-phone"></i> 123-456-789</li>
@@ -87,7 +87,7 @@
                         <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
                             class="fw-bold">ID:</span>{{ $data->id }}</li>
                         <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                            class="fw-bold">Creation Date: </span>Jun 23,2021</li>
+                            class="fw-bold">Creation Date: </span>{{ $data->updated_at->format('d-m-Y') }}</li>
                         <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
                             class="me-1 fw-bold">Status:</span><span class="badge bg-warning text-black fw-bold">
                                 {{ $data->status }}</span></li>
@@ -137,10 +137,10 @@
                     <div class="col-xl-10">
                       <p>Thank you for your purchase</p>
                     </div>
-                    <div class="col-xl-2">
+                    {{-- <div class="col-xl-2">
                       <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary text-capitalize"
                         style="background-color:#60bdf3 ;">Pay Now</button>
-                    </div>
+                    </div> --}}
                   </div>
 
                 </div>

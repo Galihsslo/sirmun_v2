@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_jenis');
             $table->string('nama');
             $table->string('petugas');
             $table->bigInteger('jenis_pembayaran');
@@ -22,6 +23,9 @@ return new class extends Migration
             $table->enum('status', ['unpaid', 'paid']);
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('id_jenis')->references('id')->on('jenis_pembayaran')->onDelete('cascade');
+
         });
     }
 

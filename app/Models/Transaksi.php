@@ -13,6 +13,7 @@ class Transaksi extends Model
 
     protected $fillable = [
         'jenis_transaksi',
+        'order_id',
         'petugas_id',
         'keterangan',
         'jumlah',

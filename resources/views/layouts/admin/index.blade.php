@@ -84,9 +84,12 @@
                     <i class="fas fa-newspaper"></i>
                     <span>Artikel</span>
                 </a>
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="berita">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Berita</span></a>
+                <a class="nav-link" href="kegiatan">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Kegiatan</span></a>
             </li>
             <hr class="sidebar-divider">
             <li class="nav-item">

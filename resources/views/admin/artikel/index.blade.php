@@ -66,6 +66,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     <?php $i = 1; ?>
                                     @foreach ($artikel as $item)
                                     <tr class="odd">

@@ -49,13 +49,13 @@
                                             No.</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Position: activate to sort column ascending"
-                                            style="width:   40px;">jenis_transaksi</th>
+                                            style="width:   40px;">ID Pembayaran</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Position: activate to sort column ascending"
                                             style="width:   40px;">Petugas</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Office: activate to sort column ascending"
-                                            style="width: 76px;">keterangan</th>
+                                            style="width: 76px;">Pembayaran</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Age: activate to sort column ascending"
                                             style="width: 31px;">Jumlah</th>
@@ -73,23 +73,28 @@
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    @foreach ($data as $item)
+                                    @foreach ($pembayaran as $item)
                                     <tr class="odd">
                                         <td class="sorting_1">{{ $i++ }}</td>
-                                        <td>{{ $item->jenis_transaksi }}</td>
+                                        <td>{{ $item->id_jenis }}</td>
                                         <td>{{ $item->user->nama }}</td>
-                                        <td>{{ $item->keterangan }}</td>
-                                        <td>{{ $item->jumlah }}</td>
-                                        <td>{{ $item->tanggal_transaksi }}</td>
+                                        <td>{{ $item->nama }}</td>
+                                        <td>{{ $item->nominal }}</td>
+                                        <td>{{ $item->date }}</td>
                                         <td>{{ $item->status }}</td>
 
                                         <td>
                                                 @if ($item->status == 'unpaid')
-                                                <a href="{{ url('pembayaran/view/' . $item->id . '') }}"
-                                                    class="btn btn-primary btn-sm md-1">Lihat</a>
+                                                <form action="{{ url('bayar/' . $item->id . '') }} " method="POST">
+                                                @method('post')
+                                                @csrf
+                                                <button class="btn btn-primary btn-sm md-1" type="submit">bayar</button>
+                                                </form>
+                                                {{-- <a href="{{ url('bayar/' . $item->id . '') }}"
+                                                    class="btn btn-primary btn-sm md-1">Lihat</a> --}}
                                                 @elseif ($item->status == 'paid')
                                                 <a href="{{ url('invoice/' . $item->id . '') }}"
-                                                    class="btn btn-primary btn-sm md-1">Lihat Faktur</a>
+                                                    class="btn btn-warning btn-sm md-1">Lihat Faktur</a>
                                                 @endif
                                             {{-- <a href="{{ url('/admin/artikel/delete/' . $item->id . '') }}"
                                                 class="btn btn-danger btn-sm ">Delete</a> --}}

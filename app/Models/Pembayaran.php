@@ -12,6 +12,7 @@ class Pembayaran extends Model
     protected $table = 'pembayaran';
 
     protected $fillable = [
+        'id',
         'nama',
         'petugas',
         'jenis_pembayaran',
@@ -20,4 +21,18 @@ class Pembayaran extends Model
         'date',
         'status',
     ];
+
+
+    public function getIsExpenseAttribute($value)
+    {
+        return $value === 'N' ? 'Pendapatan' : 'Pengeluaran';
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'petugas');
+    }
+    public function jenisPembayaran()
+    {
+        return $this->belongsTo(Pembayaran::class, 'id_jenis');
+    }
 }

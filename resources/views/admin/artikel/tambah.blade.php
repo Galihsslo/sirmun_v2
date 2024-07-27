@@ -4,7 +4,7 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Pengguna</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Artikel</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -30,7 +30,7 @@
                                 <div class="col-md-12">
                                     <div class="card border-0 shadow">
                                         <div class="card-header">
-                                            <h6 class="m-0 font-weight-bold"><i class="fas fa-user-circle"></i> Tambah Pengguna</h6>
+                                            <h6 class="m-0 font-weight-bold"><i class="fas fa-user-circle"></i> Tambah Artikel</h6>
                                         </div>
 
                                         <div class="card-body">
@@ -68,7 +68,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <button class="btn btn-primary text-uppercase" type="submit">
-                                                        Tambah Pengguna
+                                                        Tambah Artikel
                                                     </button>
                                                 </div>
                                             </form>

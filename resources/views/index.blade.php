@@ -47,19 +47,19 @@
                         <a href="">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             <span>
-                                Call : +01 123455678990
+                                Call : {{ $profile->telpon }}
                             </span>
                         </a>
                         <a href="">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                                Email : demo@gmail.com
+                                Email : {{ $profile->email }}
                             </span>
                         </a>
                         <a href="https://maps.app.goo.gl/S5KXMNjR4YyTW2n49">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
                             <span>
-                                Location
+                                {{ $profile->alamat }}
                             </span>
                         </a>
                     </div>
@@ -70,7 +70,7 @@
                     <nav class="navbar navbar-expand-lg custom_nav-container ">
                         <a class="navbar-brand" href="index.html">
                             <span>
-                                Carint
+                                {{ $profile->nama }}
                             </span>
                         </a>
 
@@ -114,7 +114,13 @@
         <!-- slider section -->
         <section class="slider_section ">
             <div class="slider_bg_box">
-                <img src="{{ asset('frontend') }}/images/slider-bg.jpg" alt="">
+                @foreach ($artikel as $item)
+                @if ($item->image)
+                <img src="{{ url('foto_artikel/' . $item->image) }}" width="50px"
+                    height="50px">
+            @endif
+            @endforeach
+            {{-- <img src="{{ asset('frontend')}}/images/slider-bg.jpg" alt=""> --}}
             </div>
             <div id="customCarousel1" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
@@ -213,57 +219,66 @@
             <div class="container ">
                 <div class="heading_container">
                     <h2>
-                        Our <span>Services</span>
+                        SIRMUN <span>Article</span>
                     </h2>
                     <p>
                         There are many variations of passages of Lorem Ipsum available, but the majority have suffered
                         alteration
                     </p>
                 </div>
+                @foreach ($artikel as $item)
                 <div class="row">
                     <div class="col-md-6 ">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="images/s1.png" alt="">
+                                {{-- <img src="images/s1.png" alt=""> --}}
+                                @if ($item->image)
+                                <img src="{{ url('foto_artikel/' . $item->image) }}" width="50px"
+                                    height="50px">
+                            @endif
                             </div>
                             <div class="detail-box">
                                 <h5>
-                                    Air Transport
+                                    {{ $item->title }}
                                 </h5>
                                 <p>
-                                    fact that a reader will be distracted by the readable content of a page when looking
-                                    at its layout.
-                                    The
-                                    point of using
+                                    {{ Str::limit($item->content, 100) }}
+                                    <span id="more-{{ $item->id }}" style="display:none;">{!! substr($item->content, 500) !!}</span>
                                 </p>
-                                <a href="">
+                                <a href="readmore/{{ $item->id }}" class="read-more">
                                     Read More
                                 </a>
+
+
                             </div>
                         </div>
                     </div>
+                    @endforeach
+                    @foreach ($artikels as $data)
+
                     <div class="col-md-6 ">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="images/s2.png" alt="">
+                                @if ($data->image)
+                                <img src="{{ url('foto_artikel/' . $data->image) }}" width="50px"
+                                    height="50px">
+                            @endif
                             </div>
                             <div class="detail-box">
                                 <h5>
-                                    Cargo Transport
+                                    {{ $data->title }}
                                 </h5>
                                 <p>
-                                    fact that a reader will be distracted by the readable content of a page when looking
-                                    at its layout.
-                                    The
-                                    point of using
+                                    {{ Str::limit($data->content, 100) }}
+                                    <span id="more-{{ $data->id }}" style="display:none;">{!! substr($data->content, 500) !!}</span>
                                 </p>
-                                <a href="">
+                                <a href="readmore/{{ $data->id }}" class="read-more">
                                     Read More
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 ">
+                     {{--<div class="col-md-6 ">
                         <div class="box ">
                             <div class="img-box">
                                 <img src="{{ asset('frontend') }}/images/s3.png" alt="">
@@ -304,7 +319,8 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -353,7 +369,7 @@
 
     <!-- track section -->
 
-    <section class="track_section layout_padding">
+    {{-- <section class="track_section layout_padding">
         <div class="track_bg_box">
             <img src="{{ asset('frontend') }}/images/track-bg.jpg" alt="">
         </div>
@@ -380,7 +396,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- end track section -->
 
@@ -573,19 +589,19 @@
                             <a href="">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                                 <span>
-                                    Location
+                                    {{ $profile->alamat }}
                                 </span>
                             </a>
                             <a href="">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                                 <span>
-                                    Call +01 1234567890
+                                    Call {{ $profile->telpon }}
                                 </span>
                             </a>
                             <a href="">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                 <span>
-                                    demo@gmail.com
+                                    {{ $profile->email }}
                                 </span>
                             </a>
                         </div>
@@ -611,8 +627,7 @@
                             Info
                         </h4>
                         <p>
-                            necessary, making this the first true generator on the Internet. It uses a dictionary of
-                            over 200 Latin words, combined with a handful
+                            {{ $profile->description }}
                         </p>
                     </div>
                 </div>
@@ -663,9 +678,7 @@
         <div class="container">
             <p>
                 &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a>
-                Distributed By
-                <a href="https://themewagon.com">ThemeWagon</a>
+                <a href="https://sentramediadevelopment.tech/">SMD</a>
             </p>
         </div>
     </section>

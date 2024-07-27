@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
 {
-    public function index($id)
+    public function index()
     {
 
-        $user = User::find($id)->first();
         $data = Transaksi::all();
-        return view('bendahara.pembayaran.index',compact('data','user'));
+        return view('bendahara.pembayaran.index',compact('data'));
     }
+
+    // public function view(string $id)
+    // {
+    //     $user = User::find($id)->first();
+    //     $data = Transaksi::all();
+    //     return view('bendahara.pembayaran.index',compact('data','user'));
+    // }
 }

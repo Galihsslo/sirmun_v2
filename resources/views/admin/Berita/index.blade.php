@@ -6,10 +6,10 @@
     <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Pengguna</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Berita</h6>
             <div class="dropdown no-arrow">
-                <a href="{{ route('tambah.artikel') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                        class="fas fa-solid fa-plus"></i>Tambah Artikel</a>
+                <a href="{{ route('tambah.berita') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        class="fas fa-solid fa-plus"></i>Tambah Berita</a>
             </div>
         </div>
         <!-- Card Body -->
@@ -67,16 +67,25 @@
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    @foreach ($artikel as $item)
+                                    @foreach ($berita as $item)
                                     <tr class="odd">
                                         <td class="sorting_1">{{ $i++ }}</td>
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->content }}</td>
                                         <td>{{ $item->image }}</td>
-                                        <td>{{ $item->nama }}</td>
+                                        <td>{{ $item->user->nama }}</td>
                                         <td>
-                                            <a href="/admin/user/1/edit" class="btn btn-primary btn-sm md-1">Edit</a>
-                                            <a href="/admin/user/1/delete" class="btn btn-danger btn-sm ">Delete</a>
+                                            <a href="{{ url('/admin/berita/edit/' . $item->id . '') }}"
+                                                class="btn btn-primary btn-sm md-1">Edit</a>
+                                            {{-- <a href="{{ url('/admin/berita/delete/' . $item->id . '') }}"
+                                                class="btn btn-danger btn-sm ">Delete</a> --}}
+                                            <form onsubmit="return confirm('Are you sure?')" class="d-inline"
+                                                action="{{ url('/admin/berita/delete/' . $item->id . '') }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm ">Hapus</button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

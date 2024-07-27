@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembayaran;
 use App\Models\User;
 use App\Models\Transaksi;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class OperatorController extends Controller
@@ -13,7 +15,10 @@ class OperatorController extends Controller
      */
     public function index()
     {
-        return view('operator.index');
+        $data = Pembayaran::all();
+        $status = Pembayaran::where('status','paid')->count();
+        $tagihan = Pembayaran::where('status','unpaid')->count();
+        return view('operator.index', compact('data','status','tagihan'));
     }
     public function view($id)
     {
@@ -28,11 +33,13 @@ class OperatorController extends Controller
         return view('operator.pembayaran.index',compact('data'));;
     }
 
-    public function bayar(Request $request){
+    public function bayar(Request $request, $id){
         {
 
-            $request->all();
-            $data = Transaksi::find($request->id);
+            $data = Transaksi::find($id);
+            // dd($data);
+            // $request->all();
+            // $data = Transaksi::find($request->id);
             // dd($request->all());
             // $order = Transaksi::select($request->all());
 
@@ -47,17 +54,17 @@ class OperatorController extends Controller
 
             $params = array(
                 'transaction_details' => array(
-                    'order_id' => $request->id,
-                    'gross_amount' => $request->jumlah,
+                    'order_id' => $data->id,
+                    'gross_amount' => $data->jumlah,
                 ),
                 'customer_details' => array(
-                    'first_name' => auth()->user()->name,
+                    'first_name' => auth()->user()->nama,
                     // 'phone' => $request->phone,
                 ),
             );
 
             $snapToken = \Midtrans\Snap::getSnapToken($params);
-            // dd($snapToken);
+
             return view('operator.pembayaran.bayar', compact('snapToken', 'data'));
         }
     }
@@ -72,6 +79,7 @@ class OperatorController extends Controller
         if ($hashed == $request->signature_key) {
             if($request->transaction_status == 'capture' ){
                 $order = Transaksi::find($request->order_id);
+                // dd($order);
                 $order->update(['status' => 'paid']);
             }elseif($request->transaction_status == 'settlement'){
                 $order = Transaksi::find($request->order_id);

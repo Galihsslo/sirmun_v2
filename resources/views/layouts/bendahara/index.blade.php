@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Dashboard</title>
+    <title>Bendahara - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('admin') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,6 +21,8 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- Custom styles for this template-->
+    <link href="https://cdn.jsdelivr.net/npm/@arielmejiadev/larapex-charts/dist/css/larapex-charts.min.css"
+        rel="stylesheet">
     <link href="{{ asset('admin') }}/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
@@ -37,12 +39,12 @@
 
             <!-- Sidebar - Brand -->
 
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin/dashboard">
-                <div class="sidebar-brand-icon width-50 height-50">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ auth()->user()->role }}">
+                <div class="sidebar-icon ">
                     {{-- <i class="fas fa-regular fa-landmark"></i> --}}
-                    <img src="{{ asset('admin') }}/logo.png" class="img-fluid " alt="">
+                    <img src="{{ asset('admin') }}/logo.png" class="img-fluid " style="width: 50px; height: 50px;" alt="Logo">
                 </div>
-                <div class="sidebar-brand-text mx-3">SIRMUN </div>
+                <div class="sidebar-brand-text mx-2">SIRMUN </div>
             </a>
 
             <!-- Divider -->
@@ -50,7 +52,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ url('admin/dashboard') }}">
+                <a class="nav-link" href="{{ url('bendahara') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -62,9 +64,27 @@
             <div class="sidebar-heading">
                 Interface
             </div>
+            <li class="nav-item">
+                <a class="nav-link" href="bendahara/profile">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Profile</span></a>
+                {{-- <a class="nav-link collapsed" href=" ">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Pengeluaran</span>
+                </a> --}}
+
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Transaksi
+            </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-users"></i>
@@ -72,30 +92,36 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
+                        {{-- <h6 class="collapse-header">Custom Components:</h6>
                         <a class="collapse-item" href="{{ url('admin/user/tambah') }}">Jenis Pembayaran</a>
                         <a class="collapse-item" href="{{ url('admin/user/tambah') }}">Kategori</a>
                         <a class="collapse-item" href="{{ url('admin/user') }}">Tagihan</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('admin/artikel') }}">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Rekapitulasi</span>
+                <a class="nav-link collapsed" href="{{ route('kategori') }} ">
+                    <i class="fas fa-list"></i>
+                    <span>Kategori</span>
                 </a>
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                <a class="nav-link" href="{{ url('bendahara/tagihan') }}">
+                    <i class="fas fa-fw fa-file-invoice"></i>
+                    <span>Tagihan</span></a>
             </li>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Laporan
+            </div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('transaksi') }}">
+                <a class="nav-link collapsed" href="{{ url('bendahara/tagihan') }}">
                     <i class="fas fa-newspaper"></i>
-                    <span>Transaksi</span>
+                    <span>Tagihan</span>
                 </a>
             </li>
+            <!-- Heading -->
+
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-newspaper"></i>
@@ -111,7 +137,7 @@
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
             {{-- <!-- Divider -->
             <hr class="sidebar-divider">
@@ -401,7 +427,9 @@
                         <!-- Pie Chart -->
 
                     </div>
-
+<div class="row">
+    @yield('news')
+</div>
                     <!-- Content Row -->
 
 
@@ -451,6 +479,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('admin') }}/vendor/jquery/jquery.min.js"></script>
